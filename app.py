@@ -12,6 +12,7 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 app = Flask(__name__)
 # app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 jira_api_token = os.environ.get("JIRA_API_TOKEN")
+sentry_api_token = os.environ.get("SENTRY_API_TOKEN")
 sentry_sdk.init(
     dsn=os.environ.get("DSN"),
     integrations=[FlaskIntegration()],
@@ -111,10 +112,8 @@ def post_jira_issue(link, title, short, details):
     return r
 
 def get_sentry_issue(issue_id):
-    token = "7ef732fabefb4d91b04234b168c7d3cebc320587080f4b3a939165a92bee8a25"
-
     url = u'https://sentry.io/api/0/issues/{}/'.format(issue_id)
-    headers = {'Authorization': u'Bearer {}'.format(token)}
+    headers = {'Authorization': u'Bearer {}'.format(sentry_api_token)}
 
     resp = requests.get(url, headers=headers)
     return resp.json()
