@@ -15,12 +15,12 @@ sentry_app_id = os.environ.get("SENTRY_APP_INSTALL_ID")
 sentry_sdk.init(
     dsn=os.environ.get("DSN"),
     integrations=[FlaskIntegration()],
-    environment="production",
+    environment="poop",
 )
 @app.route("/")
 def trigger_issue():
     try:
-        okaydontbreakkkkk() # change this each time to make a new issue
+        heck_the_planeet() # change this each time to make a new issue
     except Exception as e:
         sentry_sdk.capture_exception(e)
     return 'h-hello?', 200
@@ -29,9 +29,11 @@ def trigger_issue():
 def linking():
     data = json.loads(request.data)
     response_text = json.loads(data["fields"]["title"])
+    print("******")
+    print(response_text)
     response = {
         "webUrl": "https://hellboi2020.atlassian.net/browse/{}".format(response_text["key"]),
-        "project": "HEK",
+        "project": "HAW",
         "identifier": response_text["key"][4:]
     }
     return jsonify(response)
@@ -44,7 +46,7 @@ def webhook():
         return
 
     issue_id = data['data']['issue']['id']
-    create_link(issue_id) # pretend to submit the UI element thing
+    create_link(issue_id)
     return 'OK'
 
 def post_jira_issue(link, title, short, body, platform):
@@ -61,7 +63,7 @@ def post_jira_issue(link, title, short, body, platform):
     "fields": {
        "project":
        {
-          "key": "HEK"
+          "key": "HAW"
        },
        "summary": title,
         "description": {
@@ -161,10 +163,9 @@ def create_link(issue_id):
         body += "File \"{}\", line {}, in {} \n".format(a, b, c)
         target_line = [i[1] for i in event_info["event"]["entries"][0]["data"]["values"][0]["stacktrace"]["frames"][0]["context"] if i[0] == b]
         body += target_line[0] + "\n"
+    # TODO: this might be fragile
 
     response_text = post_jira_issue(link, title, short, body, platform)
-    print("response text: ", response_text)
-
 
     url = u'https://sentry.io/api/0/sentry-app-installations/{}/external-issues/'.format(sentry_app_id)
     # TODO: I dont think non-Sentry people would know their app install id
