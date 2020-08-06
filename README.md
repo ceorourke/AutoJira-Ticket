@@ -44,6 +44,6 @@ a Jira ticket. Probably you have actual code to run this on though. The Jira pro
 
 Look, I know you can't tell from these that I didn't just create the ticket manually but I promise I did not, otherwise this repo would be pointless.
 
-![Image of Sentry Issue](heckweek1.png)
+![Image of Sentry Issue](heckweek_sentry.png)
 
-![Image of Jira Issue](heckweek2.png)
+![Image of Jira Issue](heckweek_jira.png)
