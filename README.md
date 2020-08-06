@@ -3,7 +3,7 @@ Automatically creates a Jira ticket when a Sentry issue is created, whether you 
 To run this you must:
 
 * Create a Sentry internal integration: https://docs.sentry.io/workflow/integrations/integration-platform/#creating-an-integration
-	* Permissions: read access on "Issue & Event", org read
+	* Permissions: read access on "Issue & Event", read access on "Organization"
 	* Webhook: "issue"
 * Get a Jira API token: https://id.atlassian.com/manage/api-tokens
 
