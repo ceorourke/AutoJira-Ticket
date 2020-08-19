@@ -15,22 +15,20 @@ sentry_app_id = os.environ.get("SENTRY_APP_INSTALL_ID")
 sentry_sdk.init(
     dsn=os.environ.get("DSN"),
     integrations=[FlaskIntegration()],
-    environment="poop",
+    environment="production",
 )
 @app.route("/")
 def trigger_issue():
     try:
-        heck_the_planeet() # change this each time to make a new issue
+        heck_the_planet() 
     except Exception as e:
         sentry_sdk.capture_exception(e)
-    return 'h-hello?', 200
+    return 'heck the planet!', 200
 
 @app.route('/linking', methods=['POST'])
 def linking():
     data = json.loads(request.data)
     response_text = json.loads(data["fields"]["title"])
-    print("******")
-    print(response_text)
     response = {
         "webUrl": "https://hellboi2020.atlassian.net/browse/{}".format(response_text["key"]),
         "project": "HAW",
